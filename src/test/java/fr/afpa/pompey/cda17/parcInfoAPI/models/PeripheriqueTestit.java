@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PeripheriqueTest {
+class PeripheriqueTestit {
 
     /**
      * Test to verify the getter for the 'idAppareil' property.

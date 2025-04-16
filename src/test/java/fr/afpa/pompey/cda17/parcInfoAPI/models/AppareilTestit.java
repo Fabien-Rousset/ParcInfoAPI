@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppareilTest {
+public class AppareilTestit {
 
     /**
      * Test to verify the getter for the 'id' field of the Appareil class.

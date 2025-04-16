@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class PersonneTest {
+class PersonneTestit {
 
     @Test
     void getId() {

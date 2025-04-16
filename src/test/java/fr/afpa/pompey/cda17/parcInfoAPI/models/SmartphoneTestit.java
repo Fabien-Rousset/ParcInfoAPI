@@ -1,14 +1,11 @@
 package fr.afpa.pompey.cda17.parcInfoAPI.models;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 //@SpringBootTest
-public class SmartphoneTest {
+public class SmartphoneTestit {
     @Test
     void setAndGetEstSmartphone() {
  Smartphone smartphone = new Smartphone();

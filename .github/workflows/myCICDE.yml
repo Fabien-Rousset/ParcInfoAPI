@@ -1,0 +1,32 @@
+name: myCICDE.yml
+run-name: ${{ github.actor }} is testing out GitHub Aactions
+on: [push]
+
+jobs:
+  buil-projet:
+    runs-on: ubuntu-latest
+    steps:
+
+      # recopie de mon dépôt
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "the ${{ github.repository}} repo has been cloned to the runner."
+      - run: echo "the workflow is now ready to build your code on the runner
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      # installation de la JDK
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'zulu'
+
+      #construction du projet
+      - name: Build projet
+        run: mvn -B verify
+
+      - run: echo "This job's status is ${{ job.status }}
+
+

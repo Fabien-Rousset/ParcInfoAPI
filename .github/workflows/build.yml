@@ -34,12 +34,7 @@ jobs:
       #- name: Create Database from script
        # run: mysql -u${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} -e "source infra/mysql/dump/springboot.sql"
 
-      - name: Charging artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: package.jar
-          path: target/*.jar
-          rentention-days: 1
+
 
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -48,7 +43,15 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Fabien-Rousset_ParcInfoAPI-fabien
+          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Fabien-Rousset_ParcInfoAPI
+
+      - name: Charging artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package.jar
+          path: target/*.jar
+          rentention-days: 1

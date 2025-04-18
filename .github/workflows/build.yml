@@ -34,12 +34,11 @@ jobs:
       - name: Create Database from script
         run: mysql -u${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} -e "source infra/mysql/dump/springboot.sql"
 
-      - name: Charging artefact #permet de charger un artefact
-        uses: actions/upload@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: package.jar
-          path: target/*.jar
-          rentention-days: 1
+          name: my-artifact
+          path: path/to/your/file-or-folder
 
       - name: Cache Maven packages
         uses: actions/cache@v4

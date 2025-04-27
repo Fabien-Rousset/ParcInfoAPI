@@ -1,5 +1,5 @@
 # --- Étape 1 : compilation avec Maven ---
-FROM maven:3.9.0-eclipse-temurin-21 AS builder
+FROM maven:3.9.0-openjdk-21-slim AS builder
 WORKDIR /app
 
 # Copier uniquement le pom pour profiter du cache Docker
@@ -11,7 +11,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests -B
 
 # --- Étape 2 : image d’exécution allégée ---
-FROM eclipse-temurin:21-jre-alpine
+FROM openjdk:21-jre-slim
 WORKDIR /app
 
 # Copier le JAR généré depuis l'étape builder

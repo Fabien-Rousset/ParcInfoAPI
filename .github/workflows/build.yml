@@ -18,8 +18,28 @@ jobs:
       - name: Start MySql # demarrage du service mysql
         run: sudo service mysql start
 
-      - name: Create Database from script
-        run: mysql -u${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} -e "source infra/mysql/parcinfoapi.sql"
+      - name: Start MySql
+        run: sudo service mysql start
+
+      - name: Create database if not exists
+        # évite le warning Insecure password
+        env:
+          MYSQL_PWD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          mysql -u"${{ secrets.DB_USER }}" \
+            -e "CREATE DATABASE IF NOT EXISTS parcinfoapi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+      - name: Import schema into parcinfoapi
+        env:
+          MYSQL_PWD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          # vérifie que le fichier est bien présent
+          ls infra/mysql
+          # importe en ciblant explicitement la base
+          mysql -u"${{ secrets.DB_USER }}" \
+            parcinfoapi \
+            < infra/mysql/parcinfoapi.sql
+      
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
